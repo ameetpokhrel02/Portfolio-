@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ameet Pokhrel - Resume</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .resume-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            color: #2F192E;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            color: #f64c57;
+            border-bottom: 2px solid #f64c57;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .summary {
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        .education-item, .experience-item {
+            margin-bottom: 15px;
+        }
+        
+        .education-title, .experience-title {
+            font-weight: bold;
+        }
+        
+        .institution, .company {
+            font-style: italic;
+        }
+        
+        .date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .download-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 25px;
+            background: linear-gradient(45deg, #f64c57, #e21b5a);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(226, 27, 90, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .download-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(226, 27, 90, 0.5);
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .resume-container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            
+            .download-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container" id="resume">
+        <div class="header">
+            <h1>AMEET POKHREL</h1>
+            <div class="contact-info">Tehrathum, Nepal</div>
+            <div class="contact-info">Phone: +977-9847226995, +977-9827426289</div>
+            <div class="contact-info">Email: pokhrelameet12@gmail.com</div>
+            <div class="contact-info">LinkedIn: Ameet Pokhrel</div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">PROFESSIONAL SUMMARY</h2>
+            <div class="summary">
+                IT expert with extensive experience in hardware configuration, software installation, coding, and development. Skilled in IoT, web and app development, cybersecurity, and digital marketing. Experienced in graphic design and photography, with certifications in Photoshop, Illustrator, and wildlife photography. Currently managing IT operations and digital marketing for multiple consultancies. Certified IELTS instructor and experienced educator.
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">EDUCATION</h2>
+            <div class="education-item">
+                <div class="education-title">BSc (Hons) Computing</div>
+                <div class="institution">Itahari International College (Affiliated with London Metropolitan University, UK)</div>
+                <div class="date">2024 - Present (Currently in 2nd year, 4th semester)</div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-title">Diploma in Graphic Design</div>
+                <div class="institution">TechAxis</div>
+                <div class="date">18 months, Certified</div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-title">+2 (Higher Secondary)</div>
+                <div class="institution">Koteshwor Multiple Campus, Kathmandu, Nepal</div>
+                <div class="date">GPA: 2.79, 2022</div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-title">SEE (10th Grade)</div>
+                <div class="institution">Basanta Sadan Secondary English Boarding School, Tehrathum, Nepal</div>
+                <div class="date">GPA: 3.47, 2020</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">TECHNICAL SKILLS</h2>
+            <div class="skills-list">
+                <ul>
+                    <li><strong>Programming:</strong> C, C++, Python, Flutter, Django, HTML, CSS, JavaScript, React, Node.js</li>
+                    <li><strong>Database Management:</strong> XAMPP, MySQL, MongoDB</li>
+                    <li><strong>Cybersecurity:</strong> Linux (Basic), Command Prompt, Cisco Packet Tracer</li>
+                    <li><strong>Machine Learning & Cloud Computing:</strong> Certified in Machine Learning</li>
+                </ul>
+                <ul>
+                    <li><strong>IoT Expertise:</strong> Building robotic cars, IoT component knowledge</li>
+                    <li><strong>Graphic Design:</strong> Photoshop (Certified, 2023), Illustrator (Certified, 2024), Premiere Pro</li>
+                    <li><strong>Marketing:</strong> Meta Business Suite, Content Creation</li>
+                    <li><strong>UI/UX Design:</strong> Figma</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">WORK EXPERIENCE</h2>
+            <div class="experience-item">
+                <div class="experience-title">IT Manager & Social Media Admin</div>
+                <div class="company">Hampton Academy Consultancy (KIEC Itahari) & International Career Counseling Center (ICCC)</div>
+                <ul>
+                    <li>Managing IT infrastructure, website development, and social media platforms</li>
+                    <li>Overseeing digital marketing strategies and boosting posts via Meta Business Suite</li>
+                    <li>Teaching IELTS classes as a Certified IELTS Instructor</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-title">Graphic Designer & Content Creator</div>
+                <div class="company">Routine of Nepal Banda, NEB News, NEB Results</div>
+                <ul>
+                    <li>Moderated and managed digital content for Nepal's top information provider pages</li>
+                    <li>Designed graphics and managed social media engagement</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-title">Freelance Photographer</div>
+                <div class="company">Chitwan National Park</div>
+                <div class="date">3 Months, Wildlife Photography Award Winner 2022</div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-title">Website & App Developer</div>
+                <ul>
+                    <li>Devi Kiwi Farm Website</li>
+                    <li>College Project – Campaign Website (Frontend Completed)</li>
+                    <li>Currently developing a Flutter-based app for college coursework</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">CERTIFICATIONS & AWARDS</h2>
+            <ul>
+                <li>Certified IELTS Instructor – IDP & British Council</li>
+                <li>Machine Learning Certification</li>
+                <li>Graphic Design Certifications: Photoshop, Illustrator</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">LANGUAGES</h2>
+            <ul>
+                <li>English</li>
+                <li>Nepali</li>
+                <li>Hindi</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">ADDITIONAL EXPERTISE</h2>
+            <ul>
+                <li>IoT-based projects and robotic system development</li>
+                <li>Knowledge of cloud computing and machine learning</li>
+                <li>Digital content creation and social media management</li>
+                <li>UI/UX designing and app development</li>
+                <li>Photography (Wildlife, Event, and Commercial)</li>
+            </ul>
+        </div>
+        
+        <div class="section" style="font-style: italic; text-align: center;">
+            References available upon request.
+        </div>
+    </div>
+    
+    <button class="download-button" id="downloadPdf">Download as PDF</button>
+    
+    <script>
+        document.getElementById('downloadPdf').addEventListener('click', function() {
+            // Define PDF options
+            const options = {
+                margin: [10, 10, 10, 10],
+                filename: 'ameet-pokhrel-resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            // Get the element to convert
+            const element = document.getElementById('resume');
+            
+            // Generate the PDF
+            html2pdf().set(options).from(element).save();
+        });
+        
+        // Auto-download if coming from main site
+        if (window.opener && !window.location.hash.includes('noauto')) {
+            setTimeout(function() {
+                document.getElementById('downloadPdf').click();
+            }, 1000);
+        }
+    </script>
+</body>
+</html> 
