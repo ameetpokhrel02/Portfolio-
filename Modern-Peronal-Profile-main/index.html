@@ -7,6 +7,627 @@
     <link rel="stylesheet" href="/Modern-Peronal-Profile-main/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Add Three.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* Animation Styles */
+        .typing-container {
+            display: inline-block;
+        }
+        
+        .typing-text {
+            border-right: 3px solid var(--primary-color);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+        }
+
+        .social a {
+            transition: all 0.3s ease;
+            position: relative;
+            top: 0;
+        }
+        
+        .social a:hover {
+            transform: translateY(-5px);
+            color: var(--primary-color);
+        }
+        
+        .social a:hover i {
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .profile-pic img {
+            transition: transform 0.5s ease;
+        }
+        
+        .profile-pic:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Project card animations */
+        .project-card {
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .project-card .project-image img {
+            transition: all 0.5s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.1) rotate(2deg);
+        }
+        
+        .project-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-link i {
+            transition: transform 0.3s ease;
+        }
+        
+        .project-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Work box animations */
+        .workbox {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .workbox::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(246, 76, 87, 0.1), rgba(226, 27, 90, 0.1));
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+        
+        .workbox:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: rgba(246, 76, 87, 0.3);
+        }
+        
+        .workbox:hover::before {
+            width: 100%;
+        }
+        
+        .workbox .icon {
+            transition: all 0.3s ease;
+        }
+        
+        .workbox:hover .icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        /* Testimonial animations */
+        .testimonial-card {
+            transition: all 0.4s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+        }
+        
+        .testimonial-card .fa-quote-left {
+            transition: all 0.5s ease;
+        }
+        
+        .testimonial-card:hover .fa-quote-left {
+            transform: rotate(-10deg) scale(1.2);
+            color: var(--primary-color);
+        }
+        
+        /* Skill bar animations */
+        .skill-bar {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-bar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: none;
+        }
+        
+        .skill-bar:hover::after {
+            animation: skill-shine 1.5s infinite;
+        }
+        
+        @keyframes skill-shine {
+            0% { width: 0; left: 0; }
+            100% { width: 30%; left: 100%; }
+        }
+        
+        .skill-progress {
+            position: relative;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .skill-progress::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 5px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .skill-bar:hover .skill-progress::before {
+            opacity: 1;
+            animation: pulse-edge 1.5s infinite;
+        }
+        
+        @keyframes pulse-edge {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        /* Particle background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .profile-card {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Enhanced scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .fade-in-left.appear, .fade-in-right.appear {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Create staggered animation for items in a container */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .stagger-item.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Form field animations */
+        .form-group input, .form-group textarea {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(246, 76, 87, 0.2);
+        }
+        
+        .form-group {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-group::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #f64c57, #e21b5a);
+            transition: width 0.3s ease;
+        }
+        
+        .form-group:focus-within::after {
+            width: 100%;
+        }
+        
+        /* Button hover effects */
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(246, 76, 87, 0.3);
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        /* Footer animations */
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            background: #222;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.3rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+            transform-style: preserve-3d;
+        }
+        .footer-social a:hover {
+            background: var(--primary-color, #f64c57);
+            color: #fff;
+            transform: translateY(-5px) scale(1.15) rotateY(10deg);
+            box-shadow: 0 6px 18px rgba(246, 76, 87, 0.25);
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s, transform 0.3s;
+            transform-style: preserve-3d;
+        }
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-color, #f64c57);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--primary-color, #f64c57);
+            transform: translateZ(5px) scale(1.08);
+        }
+        .footer-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* --- ENSURE DARK MODE COMPATIBILITY --- */
+        body.dark-mode .footer-social a {
+            background: #fff;
+            color: #222;
+        }
+        body.dark-mode .footer-social a:hover {
+            background: var(--primary-color, #f64c57);
+            color: #fff;
+        }
+        body.dark-mode .footer-links a {
+            color: #fff;
+        }
+        body.dark-mode .footer-links a:hover {
+            color: var(--primary-color, #f64c57);
+        }
+        
+        /* Floating animation for chat icon */
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        .chat-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* 3D Animation Styles */
+        .profile-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.5s ease;
+        }
+        
+        .profile-card:hover {
+            transform: rotateY(5deg) rotateX(5deg);
+        }
+        
+        .profile-pic {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+        
+        .profile-pic:hover {
+            transform: translateZ(20px);
+        }
+        
+        .project-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: all 0.5s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateZ(30px) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .project-image {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-image {
+            transform: translateZ(20px);
+        }
+        
+        .workbox {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: all 0.5s ease;
+        }
+        
+        .workbox:hover {
+            transform: translateZ(20px) rotateX(5deg);
+        }
+        
+        .workbox .icon {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+        
+        .workbox:hover .icon {
+            transform: translateZ(15px) rotateY(10deg);
+        }
+        
+        /* 3D Floating Animation */
+        @keyframes float3D {
+            0% { transform: translateZ(0) rotateY(0); }
+            50% { transform: translateZ(20px) rotateY(5deg); }
+            100% { transform: translateZ(0) rotateY(0); }
+        }
+        
+        .chat-icon {
+            animation: float3D 3s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+        
+        /* 3D Button Effect */
+        .btn-primary {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateZ(10px) rotateX(5deg);
+        }
+        
+        /* 3D Skill Bar */
+        .skill-bar {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .skill-progress {
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+        
+        .skill-bar:hover .skill-progress {
+            transform: translateZ(5px);
+        }
+        
+        /* 3D Testimonial Card */
+        .testimonial-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: all 0.5s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateZ(20px) rotateY(5deg);
+        }
+        
+        .testimonial-content {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonial-card:hover .testimonial-content {
+            transform: translateZ(15px);
+        }
+        
+        /* 3D Blog Card */
+        .blog-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: all 0.5s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateZ(25px) rotateY(5deg);
+        }
+        
+        .blog-image {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover .blog-image {
+            transform: translateZ(20px);
+        }
+        
+        /* 3D Timeline */
+        .timeline-item {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: all 0.5s ease;
+        }
+        
+        .timeline-item:hover {
+            transform: translateZ(15px) rotateX(5deg);
+        }
+        
+        .timeline-content {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+        
+        .timeline-item:hover .timeline-content {
+            transform: translateZ(10px);
+        }
+        
+        /* 3D Contact Form */
+        .contact-form-container {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .form-group {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group:focus-within {
+            transform: translateZ(10px);
+        }
+        
+        /* 3D Footer */
+        .footer-container {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .footer-col {
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+        
+        .footer-col:hover {
+            transform: translateZ(15px);
+        }
+        
+        /* 3D Social Icons */
+        .social a, .footer-social a {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+        
+        .social a:hover, .footer-social a:hover {
+            transform: translateZ(10px) rotateY(10deg);
+        }
+        
+        /* 3D Navigation */
+        .nav-menu li a {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-menu li a:hover {
+            transform: translateZ(5px);
+        }
+        
+        /* 3D Scroll to Top Button */
+        #scrollToTopBtn {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+        
+        #scrollToTopBtn:hover {
+            transform: translateZ(10px) rotateX(5deg);
+        }
+        
+        /* 3D Dark Mode Toggle */
+        #darkModeToggle {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+        
+        #darkModeToggle:hover {
+            transform: translateZ(10px) rotateY(10deg);
+        }
+    </style>
 </head>
 <body>
     <!-- Header & Navigation -->
@@ -37,6 +658,9 @@
 
     <!-- Main Content -->
     <div class="container">
+        <!-- Particles background -->
+        <div id="particles-js"></div>
+        
         <!-- Hero Section -->
         <div class="profile-card">
             <div class="profile-pic">
@@ -44,8 +668,8 @@
             </div>
             <div class="profile-details">
                 <div class="intro">
-                    <h2>Ameet Pokhrel</h2>
-                    <h4>Developer & IoT Specialist</h4>
+                    <h2 class="typing-container"><span class="typing-text">Ameet Pokhrel</span></h2>
+                    <h4 id="typing-subtitle"></h4>
                     <div class="social">
                         <a href="https://www.facebook.com/amit.pokhrel.961" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                         <a href="https://x.com/pokhrelameet2" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -597,6 +1221,20 @@
                 </div>
             </div>
         </div>
+
+        <!-- Quick Links Section -->
+        <div class="quick-links">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
     </div>
     
     <!-- Footer -->
@@ -676,12 +1314,227 @@
     <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
     <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
 
+    <!-- Add particles.js library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
     <script>
         // Fade in animation for elements when page loads
         document.addEventListener('DOMContentLoaded', function() {
             const elements = document.querySelectorAll('.profile-card, .about, .skills-section, .projects-section, .blog-section, .contact-section');
             elements.forEach(el => {
                 el.style.opacity = '1';
+            });
+            
+            // Typing animation for subtitle
+            const subtitle = document.getElementById('typing-subtitle');
+            const roles = ["Developer & IoT Specialist", "UI/UX Designer", "App Developer", "Web Developer"];
+            let roleIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typingDelay = 100;
+            
+            function typeSubtitle() {
+                const currentRole = roles[roleIndex];
+                
+                if (isDeleting) {
+                    // Deleting text
+                    subtitle.textContent = currentRole.substring(0, charIndex - 1);
+                    charIndex--;
+                    typingDelay = 50;
+                } else {
+                    // Typing text
+                    subtitle.textContent = currentRole.substring(0, charIndex + 1);
+                    charIndex++;
+                    typingDelay = 150;
+                }
+                
+                if (!isDeleting && charIndex === currentRole.length) {
+                    // Finished typing, start deleting after pause
+                    isDeleting = true;
+                    typingDelay = 1500;
+                } else if (isDeleting && charIndex === 0) {
+                    // Finished deleting, start typing next role
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                    typingDelay = 500;
+                }
+                
+                setTimeout(typeSubtitle, typingDelay);
+            }
+            
+            // Start typing animation
+            setTimeout(typeSubtitle, 1000);
+            
+            // Initialize particles.js
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS("particles-js", {
+                    "particles": {
+                        "number": {
+                            "value": 50,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#f64c57"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            },
+                            "polygon": {
+                                "nb_sides": 5
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.5,
+                            "random": true,
+                            "anim": {
+                                "enable": true,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": true,
+                                "speed": 2,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#e21b5a",
+                            "opacity": 0.4,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": true,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": false,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab"
+                            },
+                            "onclick": {
+                                "enable": false,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 140,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "bubble": {
+                                "distance": 400,
+                                "size": 40,
+                                "duration": 2,
+                                "opacity": 8,
+                                "speed": 3
+                            },
+                            "repulse": {
+                                "distance": 200,
+                                "duration": 0.4
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            },
+                            "remove": {
+                                "particles_nb": 2
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+            
+            // Apply fade-in classes to sections
+            document.querySelector('.about h1').classList.add('fade-in');
+            document.querySelector('.about h2').classList.add('fade-in');
+            document.querySelectorAll('.about p').forEach(p => p.classList.add('fade-in'));
+            
+            document.querySelectorAll('.workbox').forEach((box, i) => {
+                box.classList.add('stagger-item');
+                box.style.transitionDelay = `${i * 0.1}s`;
+            });
+            
+            document.querySelector('.skills-section h1').classList.add('fade-in');
+            document.querySelector('.skills-section > p').classList.add('fade-in');
+            
+            document.querySelectorAll('.skill-category').forEach((cat, i) => {
+                cat.classList.add(i % 2 === 0 ? 'fade-in-left' : 'fade-in-right');
+            });
+            
+            document.querySelector('.timeline-section h1').classList.add('fade-in');
+            document.querySelector('.timeline-section > p').classList.add('fade-in');
+            document.querySelector('.timeline-container').classList.add('fade-in');
+            
+            document.querySelector('.projects-section h1').classList.add('fade-in');
+            document.querySelector('.projects-section > p').classList.add('fade-in');
+            
+            document.querySelectorAll('.project-card').forEach((card, i) => {
+                card.classList.add('stagger-item');
+                card.style.transitionDelay = `${i * 0.1}s`;
+            });
+            
+            document.querySelector('.testimonials-section h1').classList.add('fade-in');
+            document.querySelector('.testimonials-section > p').classList.add('fade-in');
+            
+            document.querySelectorAll('.testimonial-card').forEach((card, i) => {
+                card.classList.add('stagger-item');
+                card.style.transitionDelay = `${i * 0.15}s`;
+            });
+            
+            document.querySelector('.blog-section h1').classList.add('fade-in');
+            document.querySelector('.blog-section > p').classList.add('fade-in');
+            
+            document.querySelectorAll('.blog-card').forEach((card, i) => {
+                card.classList.add('stagger-item');
+                card.style.transitionDelay = `${i * 0.15}s`;
+            });
+            
+            document.querySelector('.contact-section h1').classList.add('fade-in');
+            document.querySelector('.contact-section > p').classList.add('fade-in');
+            document.querySelector('.contact-container').classList.add('fade-in');
+            
+            // Enhanced scroll animation
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                    }
+                });
+            }, { threshold: 0.15 });
+            
+            // Observe all elements with animation classes
+            document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .stagger-item').forEach(el => {
+                scrollObserver.observe(el);
             });
         });
 
@@ -787,7 +1640,7 @@
         timelineTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 // Remove active class from all tabs
-                timelineTabs.forEach(t => t.classList.remove('active'));
+                timelineTabs.forEach(t => t.classList.remove('active'));    
                 
                 // Add active class to clicked tab
                 tab.classList.add('active');
@@ -869,15 +1722,210 @@
             }
         });
         
-        // Skill progress animation
+        // Enhanced skill progress animation
         document.querySelectorAll('.skill-progress').forEach(progress => {
             progress.style.width = '0%';
             
-            setTimeout(() => {
-                progress.style.width = progress.parentElement.parentElement.querySelector('.skill-info span:last-child').textContent;
-            }, 500);
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        let targetWidth = progress.parentElement.parentElement.querySelector('.skill-info span:last-child').textContent;
+                        
+                        // Animate with slight delay for sequential effect
+                        setTimeout(() => {
+                            progress.style.width = targetWidth;
+                        }, 200);
+                        
+                        // Unobserve after animation is triggered
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(progress);
         });
+
+        // Add ripple effect to buttons
+        const buttons = document.querySelectorAll('.btn-primary, .download-btn, .project-link');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple element
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                
+                // Position ripple
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Style ripple
+                ripple.style.cssText = `
+                    position: absolute;
+                    background: rgba(255, 255, 255, 0.4);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    width: 0;
+                    height: 0;
+                    left: ${x}px;
+                    top: ${y}px;
+                    transform: translate(-50%, -50%);
+                    transition: all 0.6s ease;
+                `;
+                
+                // Add ripple to button
+                this.style.position = this.style.position || 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                // Animate ripple
+                setTimeout(() => {
+                    ripple.style.width = rect.width * 2.5 + 'px';
+                    ripple.style.height = rect.width * 2.5 + 'px';
+                    ripple.style.opacity = '0';
+                }, 1);
+                
+                // Remove ripple after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+        
+        // Add animation to contact form submission
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Animate form on submission
+                this.classList.add('animated');
+                
+                const formMsg = document.createElement('div');
+                formMsg.className = 'form-success-message';
+                formMsg.innerHTML = '<i class="fas fa-check-circle"></i> Your message has been sent!';
+                formMsg.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(45deg, #f64c57, #e21b5a);
+                    color: white;
+                    padding: 20px;
+                    border-radius: 10px;
+                    text-align: center;
+                    font-weight: bold;
+                    opacity: 0;
+                    transition: all 0.5s ease;
+                    width: 80%;
+                    max-width: 300px;
+                    box-shadow: 0 10px 30px rgba(246, 76, 87, 0.3);
+                `;
+                
+                this.style.position = 'relative';
+                this.appendChild(formMsg);
+                
+                // Show message after short delay
+                setTimeout(() => {
+                    formMsg.style.opacity = '1';
+                    
+                    // Reset form fields
+                    this.querySelectorAll('input, textarea').forEach(field => {
+                        field.value = '';
+                    });
+                }, 300);
+                
+                // Remove message after 3 seconds
+                setTimeout(() => {
+                    formMsg.style.opacity = '0';
+                    setTimeout(() => formMsg.remove(), 500);
+                }, 3000);
+            });
+        }
     </script>
     <script src="/Modern-Peronal-Profile-main/resume/generate-pdf.js"></script>
+    
+    <!-- Three.js Background Animation -->
+    <script>
+        // Create scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        
+        // Set renderer size and add to DOM
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('particles-js').appendChild(renderer.domElement);
+        
+        // Create geometry
+        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+        const material = new THREE.MeshPhongMaterial({
+            color: 0xf64c57,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.3
+        });
+        
+        const torusKnot = new THREE.Mesh(geometry, material);
+        scene.add(torusKnot);
+        
+        // Add lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(25, 25, 25);
+        scene.add(pointLight);
+        
+        // Position camera
+        camera.position.z = 30;
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            torusKnot.rotation.x += 0.01;
+            torusKnot.rotation.y += 0.01;
+            
+            // Make torusKnot follow mouse movement
+            document.addEventListener('mousemove', (event) => {
+                const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+                
+                torusKnot.rotation.x += mouseY * 0.01;
+                torusKnot.rotation.y += mouseX * 0.01;
+            });
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Start animation
+        animate();
+        
+        // Add 3D tilt effect to profile card
+        const profileCard = document.querySelector('.profile-card');
+        
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth - 0.5;
+            const y = e.clientY / window.innerHeight - 0.5;
+            
+            profileCard.style.transform = `
+                perspective(1000px)
+                rotateY(${x * 10}deg)
+                rotateX(${-y * 10}deg)
+                translateZ(10px)
+            `;
+        });
+        
+        // Reset profile card position when mouse leaves
+        document.addEventListener('mouseleave', () => {
+            profileCard.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) translateZ(0)';
+        });
+    </script>
 </body>
 </html>
