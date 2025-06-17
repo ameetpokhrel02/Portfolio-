@@ -339,12 +339,17 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             transition: background 0.3s, color 0.3s, transform 0.3s;
             transform-style: preserve-3d;
+            position: relative;
+            z-index: 10;
         }
         .footer-social a:hover {
             background: var(--primary-color, #f64c57);
             color: #fff;
-            transform: translateY(-5px) scale(1.15) rotateY(10deg);
+            transform: translateY(-5px);
             box-shadow: 0 6px 18px rgba(246, 76, 87, 0.25);
+        }
+        .footer-social a:hover i {
+            color: #fff;
         }
 
         .footer-links a {
@@ -378,9 +383,13 @@
         body.dark-mode .footer-social a {
             background: #fff;
             color: #222;
+            z-index: 10;
         }
         body.dark-mode .footer-social a:hover {
             background: var(--primary-color, #f64c57);
+            color: #fff;
+        }
+        body.dark-mode .footer-social a:hover i {
             color: #fff;
         }
         body.dark-mode .footer-links a {
