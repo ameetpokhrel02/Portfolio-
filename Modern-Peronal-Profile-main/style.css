@@ -1367,40 +1367,25 @@ a, button, .download-btn {
 }
 
 .footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     height: 40px;
+    margin: 0 5px;
+    background: #222;
     border-radius: 50%;
-    background: rgba(35, 35, 35, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ddd;
+    color: #fff;
+    font-size: 1.3rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
 }
 
 .footer-social a:hover {
-    transform: translateY(-5px);
+    background: var(--primary-color, #f64c57);
     color: #fff;
-}
-
-.footer-social a:nth-child(1):hover {
-    background-color: #3b5998;
-}
-
-.footer-social a:nth-child(2):hover {
-    background-color: #1da1f2;
-}
-
-.footer-social a:nth-child(3):hover {
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-}
-
-.footer-social a:nth-child(4):hover {
-    background-color: #0077b5;
-}
-
-.footer-social a:nth-child(5):hover {
-    background-color: #333;
+    transform: translateY(-5px) scale(1.15);
+    box-shadow: 0 6px 18px rgba(246, 76, 87, 0.25);
 }
 
 .footer-links {
