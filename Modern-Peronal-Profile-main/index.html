@@ -337,19 +337,27 @@
             color: #fff;
             font-size: 1.3rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: background 0.3s, color 0.3s, transform 0.3s;
+            transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
             transform-style: preserve-3d;
             position: relative;
             z-index: 10;
+            pointer-events: auto !important;
+            cursor: pointer;
+            will-change: transform;
         }
         .footer-social a:hover {
-            background: var(--primary-color, #f64c57);
-            color: #fff;
-            transform: translateY(-5px);
+            background: var(--primary-color, #f64c57) !important;
+            color: #fff !important;
+            transform: translateZ(10px) rotateY(10deg);
             box-shadow: 0 6px 18px rgba(246, 76, 87, 0.25);
         }
+        .footer-social a i {
+            color: inherit;
+            transition: color 0.3s, transform 0.3s;
+        }
         .footer-social a:hover i {
-            color: #fff;
+            color: #fff !important;
+            transform: scale(1.15);
         }
 
         .footer-links a {
@@ -358,6 +366,8 @@
             position: relative;
             transition: color 0.3s, transform 0.3s;
             transform-style: preserve-3d;
+            pointer-events: auto !important;
+            cursor: pointer;
         }
         .footer-links a::after {
             content: '';
@@ -372,7 +382,7 @@
             transition: transform 0.3s;
         }
         .footer-links a:hover {
-            color: var(--primary-color, #f64c57);
+            color: var(--primary-color, #f64c57) !important;
             transform: translateZ(5px) scale(1.08);
         }
         .footer-links a:hover::after {
@@ -381,22 +391,26 @@
 
         /* --- ENSURE DARK MODE COMPATIBILITY --- */
         body.dark-mode .footer-social a {
-            background: #fff;
-            color: #222;
+            background: #fff !important;
+            color: #222 !important;
             z-index: 10;
+            pointer-events: auto !important;
+            cursor: pointer !important;
         }
         body.dark-mode .footer-social a:hover {
-            background: var(--primary-color, #f64c57);
-            color: #fff;
+            background: var(--primary-color, #f64c57) !important;
+            color: #fff !important;
         }
         body.dark-mode .footer-social a:hover i {
-            color: #fff;
+            color: #fff !important;
         }
         body.dark-mode .footer-links a {
-            color: #fff;
+            color: #fff !important;
+            pointer-events: auto !important;
+            cursor: pointer !important;
         }
         body.dark-mode .footer-links a:hover {
-            color: var(--primary-color, #f64c57);
+            color: var(--primary-color, #f64c57) !important;
         }
         
         /* Floating animation for chat icon */
