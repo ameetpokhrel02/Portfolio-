@@ -324,7 +324,7 @@
             left: 100%;
         }
         
-        /* Footer animations */
+        /* REVISED FIX: Ensure Footer Social Icons Hover and Clickability */
         .footer-social a {
             display: inline-flex;
             align-items: center;
@@ -334,40 +334,44 @@
             margin: 0 5px;
             background: #222;
             border-radius: 50%;
-            color: #fff;
+            color: #fff; /* Initial color for link text and inherited by icon */
             font-size: 1.3rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
             transform-style: preserve-3d;
             position: relative;
-            z-index: 10;
-            pointer-events: auto !important;
-            cursor: pointer;
-            will-change: transform;
-        }
-        .footer-social a:hover {
-            background: var(--primary-color, #f64c57) !important;
-            color: #fff !important;
-            transform: translateZ(10px) rotateY(10deg);
-            box-shadow: 0 6px 18px rgba(246, 76, 87, 0.25);
-        }
-        .footer-social a i {
-            color: inherit;
-            transition: color 0.3s, transform 0.3s;
-        }
-        .footer-social a:hover i {
-            color: #fff !important;
-            transform: scale(1.15);
+            z-index: 100; /* Increased z-index to ensure visibility and clickability */
+            pointer-events: auto !important; /* Crucial for clickability, !important to override */
+            cursor: pointer !important; /* Ensure cursor feedback, !important to override */
+            will-change: transform; /* Performance hint for 3D transforms */
         }
 
+        .footer-social a:hover {
+            background: var(--primary-color, #f64c57) !important; /* Force background change */
+            color: #fff !important; /* Force color change */
+            transform: translateZ(10px) rotateY(10deg); /* Reintroduce full 3D effect */
+            box-shadow: 0 6px 18px rgba(246, 76, 87, 0.25);
+        }
+
+        .footer-social a i {
+            color: inherit; /* Inherit color from parent a tag */
+            transition: color 0.3s, transform 0.3s; /* Add transition for icon itself */
+        }
+
+        .footer-social a:hover i {
+            color: #fff !important; /* Force icon color change */
+            transform: scale(1.15) rotate(360deg); /* Add subtle scale and rotation to icon */
+        }
+
+        /* REVISED FIX: Ensure Footer Links Hover */
         .footer-links a {
-            color: #fff;
+            color: #fff; /* Initial color for footer links */
             text-decoration: none;
             position: relative;
             transition: color 0.3s, transform 0.3s;
             transform-style: preserve-3d;
-            pointer-events: auto !important;
-            cursor: pointer;
+            pointer-events: auto !important; /* Ensure clickability, !important to override */
+            cursor: pointer !important; /* Ensure cursor feedback, !important to override */
         }
         .footer-links a::after {
             content: '';
@@ -382,18 +386,18 @@
             transition: transform 0.3s;
         }
         .footer-links a:hover {
-            color: var(--primary-color, #f64c57) !important;
+            color: var(--primary-color, #f64c57) !important; /* Force color change */
             transform: translateZ(5px) scale(1.08);
         }
         .footer-links a:hover::after {
             transform: scaleX(1);
         }
 
-        /* --- ENSURE DARK MODE COMPATIBILITY --- */
+        /* REVISED FIX: Ensure Dark Mode Compatibility for Footer Social Icons */
         body.dark-mode .footer-social a {
             background: #fff !important;
             color: #222 !important;
-            z-index: 10;
+            z-index: 100; /* Increased z-index for dark mode as well */
             pointer-events: auto !important;
             cursor: pointer !important;
         }
@@ -404,6 +408,8 @@
         body.dark-mode .footer-social a:hover i {
             color: #fff !important;
         }
+
+        /* REVISED FIX: Ensure Dark Mode Compatibility for Footer Links */
         body.dark-mode .footer-links a {
             color: #fff !important;
             pointer-events: auto !important;
