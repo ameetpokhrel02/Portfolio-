@@ -1378,14 +1378,26 @@ a, button, .download-btn {
     color: #fff;
     font-size: 1.3rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+    transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    z-index: 100;
+    cursor: pointer;
 }
 
 .footer-social a:hover {
-    background: var(--primary-color, #f64c57);
+    background: var(--gradient-primary);
     color: #fff;
-    transform: translateY(-5px) scale(1.15);
+    transform: translateY(-5px) scale(1.1);
     box-shadow: 0 6px 18px rgba(246, 76, 87, 0.25);
+}
+
+.footer-social a i {
+    color: inherit;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.footer-social a:hover i {
+    transform: rotate(360deg);
 }
 
 .footer-links {
