@@ -882,5 +882,32 @@
         });
     </script>
     <script src="/Modern-Peronal-Profile-main/resume/generate-pdf.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 60, density: { enable: true, value_area: 800 } },
+          color: { value: ["#f64c57", "#e21b5a", "#5c65c0", "#00b4fc"] },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: true },
+          size: { value: 4, random: true },
+          line_linked: { enable: true, distance: 150, color: "#fff", opacity: 0.2, width: 1 },
+          move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out" }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          },
+          modes: {
+            repulse: { distance: 100, duration: 0.4 },
+            push: { particles_nb: 4 }
+          }
+        },
+        retina_detect: true
+      });
+    </script>
+  </body>
 </html>
