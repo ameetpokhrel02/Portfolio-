@@ -2105,3 +2105,19 @@ a, button, .download-btn {
         margin-bottom: 5px;
     }
 }
+
+/* Particles.js Background */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.container, .header {
+    position: relative;
+    z-index: 1;
+}
