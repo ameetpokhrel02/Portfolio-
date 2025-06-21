@@ -2110,11 +2110,14 @@ a, button, .download-btn {
 .awards-section {
     padding: 60px 0;
     text-align: center;
+    font-family: 'Poppins', sans-serif;
 }
-.awards-section h1 {
+.awards-section .section-title {
+    color: var(--dark-pink);
     font-size: 2.5rem;
-    color: var(--skyblue);
+    font-weight: 700;
     margin-bottom: 30px;
+    letter-spacing: 1px;
 }
 .awards-container {
     display: flex;
@@ -2123,9 +2126,9 @@ a, button, .download-btn {
     gap: 2rem;
 }
 .award-card {
-    background: #181c2f;
-    border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    background: rgba(17, 17, 17, 0.95);
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
     padding: 2rem 1.5rem;
     min-width: 320px;
     max-width: 420px;
@@ -2136,7 +2139,7 @@ a, button, .download-btn {
 }
 .award-card:hover {
     transform: translateY(-8px) scale(1.04);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+    box-shadow: var(--shadow-strong);
 }
 .award-image img {
     width: 100%;
@@ -2146,13 +2149,19 @@ a, button, .download-btn {
 }
 .award-content h3 {
     color: var(--light-purple);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-family: 'Poppins', sans-serif;
 }
 .award-content p {
     color: #bfc9e0;
     font-size: 1rem;
     margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Particles.js Background */
